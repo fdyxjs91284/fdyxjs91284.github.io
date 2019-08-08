@@ -1,21 +1,30 @@
 <!DOCTYPE html>
-<html>
-<body>
-    <div id="startgame">
+<head>
+    <style>
+        body {
+            background-image: url(theme.jpg);
+            background-size: cover;
+        }
+    </style>
 
+</head>
+<html>
+
+<body >
+    <div id="startgame" style="color:#FF0000">
     </div>
     <script type="text/javascript">
-a="0";
-window.onload = function(){
-a=prompt("你是谁啊","游客");
-  if(typeof a== "undefined" || a== null || a== ""){a="来访者";}
-P="我爱LY"
-if(a=="刘颖"){P="我爱你";}
-if(a=="李佳珊"){a="渣男";}
-alert(a+",你好啊!");
-x = document.getElementById("startgame");
-x.innerHTML = P;
-}
+        a = "0";
+        window.onload = function () {
+            a = prompt("你是谁啊", "游客");
+            if (typeof a == "undefined" || a == null || a == "") { a = "来访者"; }
+            P = "我爱LY"
+            if (a == "刘颖") { P = "我爱你"; }
+            if (a == "李佳珊") { a = "渣男"; }
+            alert(a + ",你好啊!");
+            x = document.getElementById("startgame");
+            x.innerHTML = a + ",你好啊!"+P;
+        }
 
     </script>
 
