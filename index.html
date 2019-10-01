@@ -7,6 +7,14 @@
             background-size: cover;
             background-repeat:no-repeat;
         }
+        .count {
+        float: right;
+        line-height: 33px;
+        font-size: 14px;
+        background: #23bbfb;
+        color: #fff;
+        padding: 0px 8px;
+    }
     </style>
     <style type="text/css">
         a:link {
@@ -49,7 +57,27 @@
         }
 
     </script>
-
+    <div class="count">距离我们下一次相见还有<span class="day" id="timestr"></span></div>
+    <script type="text/javascript">
+        var start = setInterval(function () {
+            var dtstr = "";
+            var now = new Date();          
+            var newdatr = new Date(now.getFullYear(), "09", "15", "18", "00", "00", "00");
+            var nowhms = now.getTime();     
+            var newhms = newdatr.getTime(); 
+            var cha = newhms - nowhms;      
+            if (cha > 0) {
+                var day = parseInt(cha / (1000 * 60 * 60 * 24));
+                var hh = parseInt((cha % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var min = parseInt(((cha % (1000 * 60 * 60 * 24)) % (1000 * 60 * 60)) / (1000 * 60));
+                var ss = parseInt((((cha % (1000 * 60 * 60 * 24)) % (1000 * 60 * 60)) % (1000 * 60)) / 1000);
+                dtstr = day;
+                dtstr = day + " 天 " + hh + " 小时 " + min + " 分钟 " + ss + " 秒 ";
+            }
+            X = document.getElementById("timestr");
+            X.innerHTML = dtstr;
+        }, 1000);
+    </script>
 
 
 
