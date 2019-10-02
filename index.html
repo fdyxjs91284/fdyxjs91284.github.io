@@ -8,13 +8,16 @@
             background-repeat:no-repeat;
         }
         .count {
-        float: right;
-        line-height: 33px;
-        font-size: 14px;
-        background: #23bbfb;
-        color: #fff;
-        padding: 0px 8px;
-    }
+            float: right;
+            line-height: 33px;
+            font-size: 14px;
+            background: -webkit-linear-gradient(#fefefe, #f6a1c8); 
+            background: -o-linear-gradient(#fefefe, #f6a1c8); 
+            background: -moz-linear-gradient(#fefefe, #f6a1c8); 
+            background: linear-gradient(#fefefe, #f6a1c8); 
+            color: #fff;
+            padding: 0px 8px;
+        }
     </style>
     <style type="text/css">
         a:link {
@@ -55,7 +58,6 @@
             x = document.getElementById("startgame");
             x.innerHTML = a + ",你好啊!"+P;
         }
-
     </script>
     <div class="count">距离我们下一次相见还有<span class="day" id="timestr"></span></div>
     <script type="text/javascript">
