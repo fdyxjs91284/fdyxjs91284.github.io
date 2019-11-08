@@ -90,13 +90,13 @@ $(function(){
 			var name = $(this).parent().children("img").first().attr("alt");
 			$(".name p").text("这是第 " + name + "张图片");
 			}
-			interval = setTimeout(auto,50000000);
+			interval = setTimeout(auto,10000);
 	}
 	
 	$(".container img").hover(function(){
 			stopPlay();
 	},function(){
-			interval = setTimeout(auto,50000000);
+			interval = setTimeout(auto,10000);
 	})
 	
 	function stopPlay(){
