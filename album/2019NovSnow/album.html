@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<style>
+    .mySlides {
+        display: none;
+        width: 30%;
+    }
+</style>
+<title>2019的第一场雪</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<html>
+
+
+<body>
+
+    <h2 class="center" >2019的第一场雪</h2>
+    <!--<button class="button black display-left" onclick="plusDivs(-1)">&#10094;</button>-->
+    <center>
+        <div class="content display-container" id="slide1" onclick="plusDivs(1)">
+            <img class="mySlides" src="1.jpg">
+            <img class="mySlides" src="2.jpg">
+            <img class="mySlides" src="3.jpg">
+            <img class="mySlides" src="4.jpg">
+            <img class="mySlides" src="5.jpg">
+            <img class="mySlides" src="6.jpg">
+            <img class="mySlides" src="7.jpg">
+            <img class="mySlides" src="8.jpg">
+            <img class="mySlides" src="9.jpg">
+            <img class="mySlides" src="10.jpg">
+            <img class="mySlides" src="11.jpg">
+            <img class="mySlides" src="12.jpg">
+            <img class="mySlides" src="13.jpg">
+            <img class="mySlides" src="14.jpg">
+            <img class="mySlides" src="15.jpg">
+            <img class="mySlides" src="16.jpg">
+            <img class="mySlides" src="17.jpg">
+            <img class="mySlides" src="18.jpg">
+            <img class="mySlides" src="19.jpg">
+            <img class="mySlides" src="20.jpg">
+            <img class="mySlides" src="21.jpg">
+            <img class="mySlides" src="22.jpg">
+            <img class="mySlides" src="23.jpg">
+            <img class="mySlides" src="24.jpg">
+            <img class="mySlides" src="25.jpg">
+            <img class="mySlides" src="26.jpg">
+            <img class="mySlides" src="27.jpg">
+            <img class="mySlides" src="28.jpg">
+            <img class="mySlides" src="29.jpg">
+            <img class="mySlides" src="30.jpg">
+            <img class="mySlides" src="31.jpg">
+            <img class="mySlides" src="32.jpg">
+            <img class="mySlides" src="33.jpg">
+            <img class="mySlides" src="34.jpg">
+            <img class="mySlides" src="35.jpg">
+            <img class="mySlides" src="36.jpg">
+            <img class="mySlides" src="37.jpg">
+            <img class="mySlides" src="38.jpg">
+            <img class="mySlides" src="39.jpg">
+            <img class="mySlides" src="40.jpg">
+            <img class="mySlides" src="41.jpg">
+            <img class="mySlides" src="42.jpg">
+            <img class="mySlides" src="43.jpg">
+            <img class="mySlides" src="44.jpg">
+            <img class="mySlides" src="45.jpg">
+            <img class="mySlides" src="46.jpg">
+            <img class="mySlides" src="47.jpg">
+
+        </div>
+        </center>
+            <!--<button class="button black display-right" onclick="plusDivs(1)">&#10095;</button>-->
+            <script>
+                var slideIndex = 1;
+                showDivs(slideIndex);
+
+                var slide1 = document.getElementById("slide1");
+
+                function plusDivs(n) {
+                    showDivs(slideIndex += n);
+                }
+
+                function showDivs(n) {
+                    var i;
+                    npx = document.body.offsetWidth;
+                    var x = document.getElementsByClassName("mySlides");
+                    if (n > x.length) { slideIndex = 1 }
+                    if (n < 1) { slideIndex = x.length }
+                    for (i = 0; i < x.length; i++) {
+                        x[i].style.display = "none";
+                        x[i].style.width = Math.floor(0.8 * npx) + "px";
+
+                    }
+                    x[slideIndex - 1].style.display = "block";
+                }
+            </script>
+
+</body>
+</html>
