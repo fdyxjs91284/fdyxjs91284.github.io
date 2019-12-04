@@ -1,20 +1,4 @@
 <!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>上传图片</title>
-</head>
-<body>
-    <div class="yanzRight">
-        <input name="evidence" onchange="uploadImg(this,'preview')" type="file" />
-        <span class="dui" id="imgOrder_dui" style="display: none;"></span>
-    </div>
-    <div id="preview">
-        <img src="" alt="" id="imghead5" height="200" width="200" />
-    </div>
-
-</body>
-
 <script>
     function uploadImg(file, imgNum) {
         var widthImg = 200; //显示图片的width
@@ -37,4 +21,22 @@
         }
     }
 </script>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>上传图片</title>
+</head>
+<body>
+    <div class="yanzRight">
+        <input name="evidence" onchange="uploadImg(this,'preview')" type="file" />
+        <span class="dui" id="imgOrder_dui" style="display: none;"></span>
+    </div>
+    <div id="preview">
+        <img src="" alt="" id="imghead5" height="200" width="200" />
+    </div>
+
+</body>
+
+
 </html>
