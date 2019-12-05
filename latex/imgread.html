@@ -105,7 +105,11 @@
 
     function oncoding() {
         inner = document.getElementById("code");
-        inner.innerHTML = '\\node[initial,initial, accepting, state] (S0) {start};';
+
+
+
+        inner.innerHTML += '\\node[initial,initial, accepting, state] (S0) {start};';
+
         x0 = Xary[0]; y0 = Yary[0];
         for (i = 1; i < Xary.length; i++) {
             xt = Xary[i] - x0;
@@ -123,6 +127,7 @@
                
 
         }
+        inner.innerHTML += "<br>\\end{tikzpicture}"
     }
 
 
@@ -169,16 +174,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>生成自动机</title>
+    <title>上传图片</title>
 </head>
 <body>
     <div>
-        <button    name="evidence" onclick="oncoding()"  /> 编码</button>鼠标单击新增状态，鼠标拖动新增转移剪头
+        单击新增状态，拖动新增转移剪头<button    name="evidence" onclick="oncoding()"  /> 编码</button>
     <span class="dui" id="imgOrder_dui" style="display: none;"></span>
 </div>
     <canvas id="test" onload="canvasOnolad()" onmousedown="    myonclick(event)" onmouseup ="mymouseup(event)"width="400" height="500" style="border:1px solid #c3c3c3;"></canvas>
-    <div id="code">
-
+    <br>\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,semithick]<br>
+    \tikzstyle{every state}=[fill=none,draw=black,text=black]<br>
+    <div id="code"><br>
+        
     </div>
 </body>
 
