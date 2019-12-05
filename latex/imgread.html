@@ -177,16 +177,34 @@
     <title>上传图片</title>
 </head>
 <body>
-    <div>
-        单击新增状态，拖动新增转移剪头<button    name="evidence" onclick="oncoding()"  /> 编码</button>
-    <span class="dui" id="imgOrder_dui" style="display: none;"></span>
-</div>
-    <canvas id="test" onload="canvasOnolad()" onmousedown="    myonclick(event)" onmouseup ="mymouseup(event)"width="400" height="500" style="border:1px solid #c3c3c3;"></canvas>
-    <br>\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,semithick]<br>
-    \tikzstyle{every state}=[fill=none,draw=black,text=black]<br>
-    <div id="code"><br>
-        
+    <div >
+        使用方法：
+        在latex文档开头加入:<br>
+        \usepackage{pgf}<br>
+        \usepackage{tikz}<br>
+        \usetikzlibrary{arrows,automata}<br>
+        \usepackage[latin1]{inputenc}<br>
+        在需要加入图的地方，将编码插入即可
+
     </div>
+
+    <div >
+        
+        <div >
+            单击新增状态，拖动新增转移剪头<button name="evidence" onclick="oncoding()" /> 编码</button>
+            
+            <span class="dui" id="imgOrder_dui" style="display: none; float: left; "></span>
+        </div>
+
+    </div>
+    <br>
+        <canvas id="test" onload="canvasOnolad()" onmousedown="    myonclick(event)" onmouseup="mymouseup(event)" width="400" height="500" style="border:1px solid #c3c3c3;"></canvas>
+        <br>\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=2.8cm,semithick]<br>
+        \tikzstyle{every state}=[fill=none,draw=black,text=black]<br>
+        <div id="code">
+            <br>
+
+        </div>
 </body>
 
 
