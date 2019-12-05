@@ -1,41 +1,79 @@
 <!doctype html>
 <script>
-    function uploadImg(file, imgNum) {
-        var widthImg = 200; //显示图片的width
-        var heightImg = 200; //显示图片的height
-        var div = document.getElementById(imgNum);
-        if (file.files && file.files[0]) {
-            div.innerHTML = '<img id="upImg">'; //生成图片
-            var img = document.getElementById('upImg'); //获得用户上传的图片节点
-            img.onload = function () {
-                img.width = widthImg;
-                img.height = heightImg;
+    function canvasOnolad(){
+    canvas = document.getElementById("test");// 获取canvas
+        cxt = canvas.getContext("2d");
+        canvas.width =1000;
+        canvas.height = 1000;
+    }
+    window.x = 0;
+    window.y = 0;
+
+    window.drawcount = 0;//状态数目
+    window.Xary = new Array();
+    window.Yary = new Array();
+    function myonclick(event) {//这个是鼠标按下时触发的函数
+        canvas = document.getElementById("test");
+        ifclick = true;
+        window.x = event.offsetX;
+        window.y = event.offsetY;
+        x = window.x;
+        y = window.y;
+        console.log([x, y])
+        
+    }
+    function mymouseup(event) {//这个是松开鼠标左键
+        canvas = document.getElementById("test");
+        ifclick = true;
+        var x = event.offsetX;
+        var y = event.offsetY;
+        console.log("UP");
+        console.log([x, y]);
+        console.log([Math.abs(window.x - x) ,  Math.abs(window.y - y)]);
+        if (Math.abs(window.x - x) < 20 && Math.abs(window.y - y) < 20) {//加状态
+            ctx = canvas.getContext("2d");
+            ctx.strokeStyle = "#000";
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.arc(x, y, 20, 0, 2 * Math.PI);
+            ctx.stroke();
+            ctx.font = "18px bold 黑体";
+            ctx.fillStyle = "#000";
+            ctx.fillText("S" + window.drawcount, x, y);
+            window.drawcount++;
+            if (window.drawcount == 1) {
+                console.log("第一次");
+                ctx.beginPath();
+                ctx.arc(x, y,25, 0, 2 * Math.PI);
+                ctx.stroke();
             }
-            var reader = new FileReader(); //判断图片是否加载完毕
-            reader.onload = function (evt) {
-                if (reader.readyState === 2) { //加载完毕后赋值
-                    img.src = evt.target.result;
-                }
-            }
-            reader.readAsDataURL(file.files[0]);
+            window.Xary.push(x);
+            window.Xary.push(y);
         }
+        else {//加转移
+            ctx = canvas.getContext("2d");
+            ctx.strokeStyle = 'red';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(window.x, window.y);
+            ctx.lineTo(x, y);
+            ctx.closePath();
+            ctx.stroke();
+        }
+
     }
 </script>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>上传图片</title>
 </head>
 <body>
-    <div class="yanzRight">
-        <input name="evidence" onchange="uploadImg(this,'preview')" type="file" />
+    <div>
+        <input name="evidence" onchange="uploadImg(this,'preview')" type="file" style="display: none;" />
         <span class="dui" id="imgOrder_dui" style="display: none;"></span>
     </div>
-    <div id="preview">
-        <img src="" alt="" id="imghead5" height="200" width="200" />
-    </div>
-
+    <canvas id="test" onload="canvasOnolad()" onmousedown="    myonclick(event)" onmouseup ="mymouseup(event)"width="400" height="500" style="border:1px solid #c3c3c3;"></canvas>
 </body>
 
 
