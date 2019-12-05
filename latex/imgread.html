@@ -12,6 +12,7 @@
     window.drawcount = 0;//状态数目
     window.Xary = new Array();
     window.Yary = new Array();
+    window.TranTable = new Array();
     function myonclick(event) {//这个是鼠标按下时触发的函数
         canvas = document.getElementById("test");
         ifclick = true;
@@ -19,17 +20,15 @@
         window.y = event.offsetY;
         x = window.x;
         y = window.y;
-        console.log([x, y])
         
     }
+
+
     function mymouseup(event) {//这个是松开鼠标左键
         canvas = document.getElementById("test");
         ifclick = true;
         var x = event.offsetX;
         var y = event.offsetY;
-        console.log("UP");
-        console.log([x, y]);
-        console.log([Math.abs(window.x - x) ,  Math.abs(window.y - y)]);
         if (Math.abs(window.x - x) < 20 && Math.abs(window.y - y) < 20) {//加状态
             ctx = canvas.getContext("2d");
             ctx.strokeStyle = "#000";
@@ -48,32 +47,139 @@
                 ctx.stroke();
             }
             window.Xary.push(x);
-            window.Xary.push(y);
+            window.Yary.push(y);
         }
         else {//加转移
+
+            //调整初始点
+            tol = 10000;
+            minindex = Xary.length;
+            for (i = 0; i < Xary.length; i++) {
+                if ((window.Xary[i] - window.x) * (window.Xary[i] - window.x) + (window.Yary[i] - window.y) * (window.Yary[i] - window.y) < tol) {
+                    tol = (window.Xary[i] - window.x) * (window.Xary[i] - window.x) + (window.Yary[i] - window.y) * (window.Yary[i] - window.y);
+                    minindex = i;
+                }
+            }
+            window.x = window.Xary[minindex] + Math.random() * 3;
+            window.y = window.Yary[minindex] + Math.random() * 3;
+            //调整末位点
+
+            tol = 10000;
+            minindex2 = Xary.length;
+            for (i = 0; i < Xary.length; i++) {
+                if ((window.Xary[i] - x) * (window.Xary[i] - x) + (window.Yary[i] - y) * (window.Yary[i] - y) < tol) {
+                    tol = ((window.Xary[i] - x) * (window.Xary[i] - x) + (window.Yary[i] - y) * (window.Yary[i] - y));
+                    minindex2 = i;
+                    console.log([i, window.Xary[i], window.Yary[i]])
+                }
+            }
+            x = window.Xary[minindex2]+Math.random() *3;
+            y = window.Yary[minindex2] + Math.random() * 3;
+            //
             ctx = canvas.getContext("2d");
-            ctx.strokeStyle = 'red';
+            color = randomcolor();
+            ctx.strokeStyle = color;
             ctx.lineWidth = 1;
             ctx.beginPath();
+            ctx.arc(window.x, window.y, 21+Math.random() *3, 0, 2 * Math.PI);
+            ctx.stroke();
             ctx.moveTo(window.x, window.y);
             ctx.lineTo(x, y);
             ctx.closePath();
             ctx.stroke();
+            window.TranTable.push(new Array());
+            window.TranTable[window.TranTable.length - 1] = [minindex, minindex2];
+            ctx.font = "18px bold 黑体";
+            ctx.fillStyle = "#000";
+            ctx.fillText("T" + (window.TranTable.length - 1), (window.x + x) / 2, (window.y + y) / 2);
         }
-
     }
+
+    function randomcolor() {
+        var color = "#";
+        for (var i = 0; i < 6; i++) {
+            color += (Math.random() * 16 | 0).toString(16);
+        }
+        return color;
+    }
+
+    function oncoding() {
+        inner = document.getElementById("code");
+        inner.innerHTML = '\\node[initial,initial, accepting, state] (S0) {start};';
+        x0 = Xary[0]; y0 = Yary[0];
+        for (i = 1; i < Xary.length; i++) {
+            xt = Xary[i] - x0;
+            xt = xt / 40;
+            yt = Yary[i] - y0;
+            yt = -yt / 40;
+            inner.innerHTML += "<br>";
+            inner.innerHTML += "\\node[state] (S"+i+ ") at("+xt+ "," +yt+") {S"+i+"};";
+        }
+       
+        for (i = 0; i < TranTable.length; i++) {
+            inner.innerHTML += "<br>\\path";
+           
+            inner.innerHTML += " (S" + TranTable[i][0] + ")"+" edge node {T" + i + "}(S"+ TranTable[i][1] +");"
+               
+
+        }
+    }
+
+
+
+    //function oncoding() {
+    //    inner = document.getElementById("code");
+    //    inner.innerHTML = '\\node[initial,initial, accepting, state] (S0) {start};';
+    //    inner.innerHTML+="<br>";
+    //    for (i = 1; i < Xary.length; i++) {
+    //        inner.innerHTML += "<br>";
+    //        tol = 10000;
+    //        minindex2 = 0;
+    //        x = window.Xary[i];
+    //        y=window.Yary[i];
+    //        for (j = 0; j < i; j++) {
+    //            if ((window.Xary[j] - x) * (window.Xary[j] - x) + (window.Yary[j] - y) * (window.Yary[j] - y) < tol) {
+    //                tol = ((window.Xary[j] - x) * (window.Xary[j] - x) + (window.Yary[j] - y) * (window.Yary[j] - y));
+    //                minindex2 = j;
+    //               }
+    //        }
+    //        console.log(tol);
+    //        UpORDown = "";
+    //        LeftOrRight = "";
+    //        if ((window.Xary[minindex2] - x) > 20)
+    //        {
+    //            LeftOrRight = "left";
+    //        }
+    //        else if ((window.Xary[minindex2] - x) < -20) {
+    //            LeftOrRight = "right";
+    //        }
+
+    //        if ((window.Yary[minindex2] - y) > 20) {
+    //            LeftOrRight = "above";
+    //        }
+    //        else if ((window.Yary[minindex2] - y) < -20) {
+    //            LeftOrRight = "below";
+    //        }
+    //        inner.innerHTML += "\\node[state] (S" + i + ") ["+UpORDown+ LeftOrRight+" of=S" + minindex2 + "] {S" + i + "};";
+          
+    //    }
+    //}
+
 </script>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>上传图片</title>
+    <title>生成自动机</title>
 </head>
 <body>
     <div>
-        <input name="evidence" onchange="uploadImg(this,'preview')" type="file" style="display: none;" />
-        <span class="dui" id="imgOrder_dui" style="display: none;"></span>
-    </div>
+        <button    name="evidence" onclick="oncoding()"  /> 编码</button>
+    <span class="dui" id="imgOrder_dui" style="display: none;"></span>
+</div>
     <canvas id="test" onload="canvasOnolad()" onmousedown="    myonclick(event)" onmouseup ="mymouseup(event)"width="400" height="500" style="border:1px solid #c3c3c3;"></canvas>
+    <div id="code">
+
+    </div>
 </body>
 
 
