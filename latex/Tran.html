@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <script>
+        T = "α,\\alpha,κ,\\kappa,ψ,\\psi,z,\\digamma,∆,\\Delta,Θ,\\Theta,\
+β,\\beta,λ,\\lambda,ρ,\\rho,ε,\\varepsilon,Γ,\\Gamma,Υ,\\Upsilon,\
+χ,\\chi,µ,\\mu,σ,\\sigma,κ,\\varkappa,Λ,\\Lambda,Ξ,\\Xi,\
+δ,\\delta,ν,\\nu,τ,\\tau,ϕ,\\varphi,Ω,\\Omega,\
+θ,\\theta,Φ,\\Phi,ℵ,\\aleph,\
+η,\\eta,ω,\\omega,υ,\\upsilon,%,\\varrho,Π,\\Pi,\
+γ,\\gamma,φ,\\phi,ξ,\\xi,ς,\\varsigma,Ψ,\\Psi,\
+ι,\\iota,π,\\pi,ζ,\\zeta,ϑ,\\vartheta,Σ,\\Sigma,ג,\\gimel"
+        
+        Arr=T.split(',');
+        Arr0=[];
+        for(i=0;i<Arr.length/2;i++){
+            Arr0[i]=[];
+            Arr0[i][0]=Arr[2*i];
+            Arr0[i][1] = Arr[2 * i + 1];
+            Arr0[i][1] += " ";
+        }
+        function translate() {
+            Area = document.getElementById("InputArea");
+            Output = document.getElementById("OUT");
+            str = Area.value;
+            str = str.replace(/∈/g, "\\in");
+            str = str.replace(/≥/g, "\\geq");
+            str = str.replace(/≤/g, "\\leq");
+            for (i = 0; i < Arr0.length; i++) {
+                var regStr = "/" + Arr0[i][0] + "/g"
+                var regExp = eval(regStr)
+                str = str.replace(regExp, Arr0[i][1]);
+            }
+            //自定部分
+            str = str.replace(/Sd\+/g, "\\mathcal{S}^d_+");
+            
+            Area.value= str;
+            
+        }
+    </script>
+    <h2>pdf复制转latex（初等）</h2>
+    <textarea rows="20" cols="40" id="InputArea">
+在这里输入你翻译要的信息</textarea><br />
+
+    <button type="button"
+            onclick="translate()">
+        转换
+    </button>
+
+   <p id="OUT"></p>
+
+
+</body>
+</html>
